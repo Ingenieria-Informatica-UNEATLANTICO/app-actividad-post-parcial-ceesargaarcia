@@ -1,6 +1,5 @@
 @startuml
 class Vehiculo {
-    -id: String
     -matricula: String
     -capacidad: Integer
     -tipo: TipoVehiculo
@@ -11,7 +10,6 @@ class Vehiculo {
 }
 
 class Conductor {
-    -id: String
     -nombre: String
     -licencia: String
     -horasServicio: Integer
@@ -21,7 +19,6 @@ class Conductor {
 }
 
 class Pasajero {
-    -id: String
     -metodoPago: TipoPago
     -tipoTarjeta: TipoTarjeta
     -saldoTarjeta: Double
@@ -31,7 +28,6 @@ class Pasajero {
 }
 
 class Ruta {
-    -id: String
     -nombre: String
     -horario: List<Horario>
     -paradas: List<Parada>
@@ -41,7 +37,6 @@ class Ruta {
 }
 
 class Tarifa {
-    -id: String
     -precio: Double
     -tipoTarifa: TipoTarifa
     -descuento: Double

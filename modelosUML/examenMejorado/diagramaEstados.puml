@@ -30,7 +30,7 @@ state Pasajero {
     }
     [*] --> pasajeroEnParada
     pasajeroEnParada --> enViaje : sube al bus
-    enViaje --> pasajeroEnParada : baja del bus
+    enViaje --> pasajeroEnParada : pago incorrecto
     enViaje --> [*] : fin de viaje
 }
 

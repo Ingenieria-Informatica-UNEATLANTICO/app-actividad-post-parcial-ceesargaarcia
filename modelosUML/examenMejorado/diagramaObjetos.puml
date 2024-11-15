@@ -1,6 +1,5 @@
 @startuml
 object "bus1: Vehiculo" as bus1 {
-    id = "VH001"
     matricula = "1234ABC"
     capacidad = 50
     tipo = AUTOBUS
@@ -8,28 +7,24 @@ object "bus1: Vehiculo" as bus1 {
 }
 
 object "Juan: Conductor" as conductor1 {
-    id = "CD001"
     nombre = "Juan García"
     licencia = "BUS123456"
     horasServicio = 8
 }
 
 object "Pepe: Pasajero" as pasajero1 {
-    id = "PS001"
     metodoPago = TARJETA_TRANSPORTE
     tipoTarjeta = NORMAL
     saldoTarjeta = 15.50
 }
 
 object "Jorge: Pasajero" as pasajero2 {
-    id = "PS002"
     metodoPago = EFECTIVO
     tipoTarjeta = null
     saldoTarjeta = 0.0
 }
 
 object "ruta1: Ruta" as ruta1 {
-    id = "RT001"
     nombre = "Santander-Maliaño"
     horario = [9:00-10:00, 10:00-11:00]
     paradas = ["Valdecilla", "Maliaño", "Astillero"]
@@ -37,7 +32,6 @@ object "ruta1: Ruta" as ruta1 {
 }
 
 object "tarifa1: Tarifa" as tarifa1 {
-    id = "TF001"
     precio = 2.20
     tipoTarifa = NORMAL
     descuento = 0.0
