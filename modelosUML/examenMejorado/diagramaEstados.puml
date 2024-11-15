@@ -1,0 +1,44 @@
+@startuml
+state Conductor {
+    state "En parada" as conductorParado
+    state "En conducción" as conduccion
+    [*] --> conductorParado
+    conductorParado --> conduccion : comienza la ruta
+    conduccion --> conductorParado : incidencia
+    conduccion --> [*] : llega al destino
+    conductorParado --> [*] : fin de servicio
+}
+
+state Vehiculo {
+    state "Fuera de servicio" as fueraServicio
+    state "En ruta" as enRuta
+    state "En parada" as vehiculoEnParada
+    [*] --> fueraServicio
+    fueraServicio --> enRuta : inicia ruta
+    enRuta --> vehiculoEnParada : para
+    vehiculoEnParada --> enRuta : sigue la ruta
+    enRuta --> [*] : llega al destino
+}
+
+state Pasajero {
+    state "En parada" as pasajeroEnParada
+    state "En pago" as enPago
+    state "En transporte" as enTransporte
+    [*] --> pasajeroEnParada
+    pasajeroEnParada --> enPago : llega el bus
+    enPago --> pasajeroEnParada : error
+    enPago --> enTransporte : pago satisfactorio
+    enTransporte --> [*] : llega al destino
+}
+
+' Relaciones entre estados de diferentes entidades
+conductorParado --> fueraServicio : asignación de vehículo
+conduccion --> enRuta : conduce
+vehiculoEnParada --> pasajeroEnParada : permite subida
+enPago --> vehiculoEnParada : registra pago
+enTransporte --> enRuta : pasajero a bordo
+
+' Sincronización de fin de servicio
+enRuta --> conductorParado : fin de servicio
+enTransporte --> pasajeroEnParada : bajada en destino
+@enduml
