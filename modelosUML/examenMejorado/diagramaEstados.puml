@@ -5,40 +5,36 @@ state Conductor {
     [*] --> conductorParado
     conductorParado --> conduccion : comienza la ruta
     conduccion --> conductorParado : incidencia
-    conduccion --> [*] : llega al destino
-    conductorParado --> [*] : fin de servicio
+    conduccion --> [*] : fin de servicio
 }
 
 state Vehiculo {
     state "Fuera de servicio" as fueraServicio
-    state "En ruta" as enRuta
-    state "En parada" as vehiculoEnParada
+    state "En servicio" as enServicio {
+        state "En ruta" as enRuta
+        state "En parada" as vehiculoEnParada
+        enRuta --> vehiculoEnParada : para
+        vehiculoEnParada --> enRuta : sigue la ruta
+    }
     [*] --> fueraServicio
-    fueraServicio --> enRuta : inicia ruta
-    enRuta --> vehiculoEnParada : para
-    vehiculoEnParada --> enRuta : sigue la ruta
-    enRuta --> [*] : llega al destino
+    fueraServicio --> enServicio : inicia servicio
+    enServicio --> fueraServicio : finaliza servicio
 }
 
 state Pasajero {
     state "En parada" as pasajeroEnParada
-    state "En pago" as enPago
-    state "En transporte" as enTransporte
+    state "En viaje" as enViaje {
+        state "En pago" as enPago
+        state "En transporte" as enTransporte
+        enPago --> enTransporte : pago correcto
+    }
     [*] --> pasajeroEnParada
-    pasajeroEnParada --> enPago : llega el bus
-    enPago --> pasajeroEnParada : error
-    enPago --> enTransporte : pago satisfactorio
-    enTransporte --> [*] : llega al destino
+    pasajeroEnParada --> enViaje : sube al bus
+    enViaje --> pasajeroEnParada : baja del bus
+    enViaje --> [*] : fin de viaje
 }
 
-' Relaciones entre estados de diferentes entidades
-conductorParado --> fueraServicio : asignación de vehículo
-conduccion --> enRuta : conduce
-vehiculoEnParada --> pasajeroEnParada : permite subida
-enPago --> vehiculoEnParada : registra pago
-enTransporte --> enRuta : pasajero a bordo
-
-' Sincronización de fin de servicio
-enRuta --> conductorParado : fin de servicio
-enTransporte --> pasajeroEnParada : bajada en destino
+' Relaciones simplificadas entre estados
+conductorParado -[dotted]-> fueraServicio : asigna
+conduccion -[dotted]-> enServicio : opera
 @enduml

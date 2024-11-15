@@ -28,13 +28,6 @@ object "Jorge: Pasajero" as pasajero2 {
     saldoTarjeta = 0.0
 }
 
-object "Ana: Pasajero" as pasajero3 {
-    id = "PS003"
-    metodoPago = TARJETA_CREDITO
-    tipoTarjeta = MAYOR_65
-    saldoTarjeta = 100.0
-}
-
 object "ruta1: Ruta" as ruta1 {
     id = "RT001"
     nombre = "Santander-Maliaño"
@@ -50,25 +43,12 @@ object "tarifa1: Tarifa" as tarifa1 {
     descuento = 0.0
 }
 
-object "tarifa2: Tarifa" as tarifa2 {
-    id = "TF002"
-    precio = 1.50
-    tipoTarifa = MAYOR_65
-    descuento = 0.70
-}
-
-' Relaciones entre objetos
+' Relaciones simplificadas
 conductor1 --> bus1 : conduce
 bus1 --> ruta1 : sigue
 bus1 --> pasajero1 : transporta
 bus1 --> pasajero2 : transporta
-bus1 --> pasajero3 : transporta
-conductor1 --> tarifa1 : cobra
-conductor1 --> tarifa2 : cobra
+conductor1 --> tarifa1 : gestiona
 pasajero1 --> tarifa1 : paga
 pasajero2 --> tarifa1 : paga
-pasajero3 --> tarifa2 : paga
-
-
-
 @enduml
