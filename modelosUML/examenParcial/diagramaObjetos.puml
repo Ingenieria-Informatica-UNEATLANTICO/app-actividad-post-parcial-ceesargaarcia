@@ -22,7 +22,7 @@ autobus --> pepe : transporta
 autobus --> jorge : transporta
 autobus --> ana : transporta
 juan --> tarifa : cobra
-autobus --> juan : conduce
+autobus <-- juan : conduce
 juan --> ruta : sigue
 pepe --> tarifa : paga
 jorge --> tarifa : paga

@@ -16,10 +16,11 @@ class Ruta {
 
 class Tarifa {
 }
-Conductor -- Ruta: sigue
+Conductor --> Ruta: sigue
 Vehiculo --  Conductor: conduce
 Vehiculo -- Pasajero: transporta
-Conductor -- Tarifa: cobra
+Conductor --> Tarifa: cobra
 Vehiculo -- Ruta: sigue
-Pasajero -- Tarifa: paga
+Pasajero --> Tarifa: paga
+Ruta --> Tarifa: influye
 @enduml
