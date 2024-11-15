@@ -1,0 +1,40 @@
+@startuml
+state Conductor {
+    state "En parada" as conductorParado
+    state "En conducción" as conduccion
+    [*] --> conductorParado
+    conductorParado --> conduccion : comienza la ruta
+    conduccion --> conductorParado : incidencia
+    conduccion --> [*] : fin de servicio
+}
+
+state Vehiculo {
+    state "Fuera de servicio" as fueraServicio
+    state "En servicio" as enServicio {
+        state "En ruta" as enRuta
+        state "En parada" as vehiculoEnParada
+        enRuta --> vehiculoEnParada : para
+        vehiculoEnParada --> enRuta : sigue la ruta
+    }
+    [*] --> fueraServicio
+    fueraServicio --> enServicio : inicia servicio
+    enServicio --> fueraServicio : finaliza servicio
+}
+
+state Pasajero {
+    state "En parada" as pasajeroEnParada
+    state "En viaje" as enViaje {
+        state "En pago" as enPago
+        state "En transporte" as enTransporte
+        enPago --> enTransporte : pago correcto
+    }
+    [*] --> pasajeroEnParada
+    pasajeroEnParada --> enViaje : sube al bus
+    enViaje --> pasajeroEnParada : pago incorrecto
+    enViaje --> [*] : fin de viaje
+}
+
+' Relaciones simplificadas entre estados
+conductorParado -[dotted]-> fueraServicio : asigna
+conduccion -[dotted]-> enServicio : opera
+@enduml

@@ -1,0 +1,48 @@
+@startuml
+object "bus1: Vehiculo" as bus1 {
+    matricula = "1234ABC"
+    capacidad = 50
+    tipo = AUTOBUS
+    estado = EN_SERVICIO
+}
+
+object "Juan: Conductor" as conductor1 {
+    nombre = "Juan García"
+    licencia = "BUS123456"
+    horasServicio = 8
+}
+
+object "Pepe: Pasajero" as pasajero1 {
+    metodoPago = TARJETA_TRANSPORTE
+    tipoTarjeta = NORMAL
+    saldoTarjeta = 15.50
+}
+
+object "Jorge: Pasajero" as pasajero2 {
+    metodoPago = EFECTIVO
+    tipoTarjeta = null
+    saldoTarjeta = 0.0
+}
+
+object "ruta1: Ruta" as ruta1 {
+    nombre = "Santander-Maliaño"
+    horario = [9:00-10:00, 10:00-11:00]
+    paradas = ["Valdecilla", "Maliaño", "Astillero"]
+    distancia = 12.5
+}
+
+object "tarifa1: Tarifa" as tarifa1 {
+    precio = 2.20
+    tipoTarifa = NORMAL
+    descuento = 0.0
+}
+
+' Relaciones simplificadas
+conductor1 --> bus1 : conduce
+bus1 --> ruta1 : sigue
+bus1 --> pasajero1 : transporta
+bus1 --> pasajero2 : transporta
+conductor1 --> tarifa1 : gestiona
+pasajero1 --> tarifa1 : paga
+pasajero2 --> tarifa1 : paga
+@enduml

@@ -1,0 +1,54 @@
+@startuml
+class Vehiculo {
+    -matricula: String
+    -capacidad: Integer
+    -tipo: TipoVehiculo
+    -estado: EstadoVehiculo
+    +iniciarServicio()
+    +finalizarServicio()
+    +registrarParada()
+}
+
+class Conductor {
+    -nombre: String
+    -licencia: String
+    -horasServicio: Integer
+    +iniciarTurno()
+    +finalizarTurno()
+    +registrarIncidencia()
+}
+
+class Pasajero {
+    -metodoPago: TipoPago
+    -tipoTarjeta: TipoTarjeta
+    -saldoTarjeta: Double
+    +pagarViaje()
+    +subirVehiculo()
+    +bajarVehiculo()
+}
+
+class Ruta {
+    -nombre: String
+    -horario: List<Horario>
+    -paradas: List<Parada>
+    -distancia: Double
+    +obtenerSiguienteParada()
+    +calcularTiempoEstimado()
+}
+
+class Tarifa {
+    -precio: Double
+    -tipoTarifa: TipoTarifa
+    -descuento: Double
+    +calcularPrecio()
+    +aplicarDescuento()
+}
+
+' Relaciones con cardinalidad
+Conductor "1" --> "1" Vehiculo: conduce 
+Vehiculo "1" --> "*" Pasajero: transporta 
+Vehiculo "1" --> "1" Ruta: sigue 
+Conductor "1" --> "1" Tarifa: cobra 
+Pasajero "1" --> "1" Tarifa: paga 
+
+@enduml

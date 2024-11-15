@@ -1,0 +1,31 @@
+@startuml object-diagram
+object "Autobus: Vehiculo" as autobus
+object "Juan: Conductor" as juan
+object "2.20€: Tarifa" as tarifa
+object "Santander-Maliaño: Ruta" as ruta {
+  horario = "9/10h"
+  estaciones = "Valdecilla, Maliaño, Astillero"
+}
+object "Pepe: Pasajero" as pepe {
+    efectivo
+}
+object "Jorge: Pasajero" as jorge {
+    abono
+}
+object "Ana: Pasajero" as ana {
+    tarjeta +65 años
+}
+object "Juan: Conductor" as juan{
+}
+
+autobus --> pepe : transporta
+autobus --> jorge : transporta
+autobus --> ana : transporta
+juan --> tarifa : cobra
+autobus <-- juan : conduce
+juan --> ruta : sigue
+pepe --> tarifa : paga
+jorge --> tarifa : paga
+ana --> tarifa : paga
+ruta --> tarifa : influye
+@enduml

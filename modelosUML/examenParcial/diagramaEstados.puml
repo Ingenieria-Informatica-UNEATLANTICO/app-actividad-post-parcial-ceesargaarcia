@@ -1,0 +1,27 @@
+@startuml passenger-states
+state Pasajero{
+    [*] --> EnParada
+    EnParada --> EnPago : llega el bus
+    EnPago --> EnParada : error
+    EnPago --> EnTransporte : pago satisfactorio
+    EnTransporte --> [*] : llega al destino
+}
+state Vehiculo{
+    state "Fuera de servicio" as fueraServicio
+    state "En ruta" as enRuta
+    state "En parada" as enParada
+    [*] --> fueraServicio
+    fueraServicio --> enRuta : inicia ruta
+    enRuta --> enParada : para
+    enParada --> enRuta : sigue la ruta
+    enRuta --> [*] : llega al destino
+}
+state Conductor{
+    state "Parado" as parado
+    state "En conducción" as conduccion
+    [*] --> parado
+    parado --> conduccion : comienza la ruta
+    conduccion --> parado : incidencia
+    conduccion --> [*] : llega al destino
+}
+@enduml
