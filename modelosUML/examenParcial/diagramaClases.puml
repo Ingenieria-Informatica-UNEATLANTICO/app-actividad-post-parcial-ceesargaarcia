@@ -1,0 +1,25 @@
+@startuml class-diagram
+class Vehiculo {
+}
+
+class Conductor {
+}
+
+class Pasajero {
+  -metodoPago: String
+}
+
+class Ruta {
+  -horario: String
+  -paradas: List
+}
+
+class Tarifa {
+}
+Conductor -- Ruta: sigue
+Vehiculo --  Conductor: conduce
+Vehiculo -- Pasajero: transporta
+Conductor -- Tarifa: cobra
+Vehiculo -- Ruta: sigue
+Pasajero -- Tarifa: paga
+@enduml
